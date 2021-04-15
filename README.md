@@ -7,5 +7,7 @@ allprojects {
   
   
   dependencies {
-	        implementation 'com.github.MNAndroidTeam:MbhProject:Tag'
+	      implementation 'com.github.MNAndroidTeam:MbhProject:1.0.0'
+	    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 	}
