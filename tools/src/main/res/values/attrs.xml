@@ -42,9 +42,9 @@
             <enum name="drawable" value="2"/>
         </attr>
 
-        <attr name="imageInto"  format="enum" >
-            <enum name="url" value="0"/>
-            <enum name="file" value="1"/>
+        <attr name="imageAs"  format="enum" >
+            <enum name="base64" value="0"/>
+            <enum name="path" value="1"/>
         </attr>
     </declare-styleable>
 
