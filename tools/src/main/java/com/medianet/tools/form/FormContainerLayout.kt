@@ -281,7 +281,7 @@ class FormContainerLayout  (
                     else -> {
                         if (it.isAnnotationPresent(EmbendedError::class.java)){
 
-                            if (children.find { it.tag.toString().split('/')[0] == tag } != null){
+                            if (children.filter { it.tag is String }.find { it.tag.toString().split('/').get(0) == tag } != null){
                                 val embendded =  Class.forName(it.type.name).newInstance()
                                 it.set(clazz ,embendded)
                                 createModelInstance(embendded , tag )
@@ -449,12 +449,12 @@ class FormContainerLayout  (
         }
         if (requestCode == GALLERIE_PICKER) {
             if (data != null) {
-                val contentURI = data.data
-                pathFromGallerie = FileChooser.getPath(context, contentURI)
-                Log.e("rrrrrrrr","rrrrrrr $pathFromGallerie")
                 try {
-                    if (contentURI != null)
-                    selectedImageView?.setImage(contentURI, getCameraPhotoOrientation(pathFromGallerie))
+                    val contentURI = data.data
+                    pathFromGallerie = FileChooser.getPath(context, contentURI)
+                    selectedImageView?.path = pathFromGallerie
+
+                    if (contentURI != null) selectedImageView?.setImage(contentURI, getCameraPhotoOrientation(pathFromGallerie))
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -463,6 +463,7 @@ class FormContainerLayout  (
         } else if (requestCode == CAMERA_PICKER) {
             try {
               if (imageUri != null){
+                  selectedImageView?.path = pathFromCamera
                   selectedImageView?.setImage(imageUri!! , getCameraPhotoOrientation(pathFromCamera))
               }
             } catch (e: Exception) {

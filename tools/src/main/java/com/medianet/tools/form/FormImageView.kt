@@ -19,8 +19,9 @@ class FormImageView(
 
     var attribute : String? =null
     var imageFrom : Int
+    var imageInto : Int
     var imagePicker : Int
-
+    var path : String = ""
     init {
 
         val a = context.obtainStyledAttributes(
@@ -30,6 +31,7 @@ class FormImageView(
         attribute = a.getString(R.styleable.FormImageView_attribute)
         imageFrom = a.getInt(R.styleable.FormImageView_imageFrom,0)
         imagePicker = a.getInt(R.styleable.FormImageView_image_picker,0)
+        imageInto = a.getInt(R.styleable.FormImageView_imageInto,0)
 
          if (attribute != null) tag = attribute
         a.recycle()
@@ -69,8 +71,17 @@ class FormImageView(
     }
 
     fun getImageValue(): String {
-        val bitmap = viewToImage(this)
-        return if (bitmap != null) bitmapToString(bitmap)?:"" else ""
+
+        when(imageInto){
+            0 -> {
+                val bitmap = viewToImage(this)
+                return if (bitmap != null) bitmapToString(bitmap)?:"" else ""
+            }
+            1-> {
+                return path
+            }
+        }
+        return ""
     }
 
 }

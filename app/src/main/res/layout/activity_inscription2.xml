@@ -30,8 +30,8 @@
                 android:layout_height="50dp"
                 android:layout_margin="30dp"
                 app:attribute="age"
-                app:layout_constraintEnd_toEndOf="@+id/input_address"
-                app:layout_constraintStart_toStartOf="@+id/input_address"
+                app:layout_constraintEnd_toEndOf="@+id/btnGallerie"
+                app:layout_constraintStart_toStartOf="@+id/btnCamera"
                 app:layout_constraintTop_toBottomOf="@+id/btnCamera"
                 app:spinnerAttribute="value" />
 
@@ -106,6 +106,8 @@
                 android:layout_height="300dp"
                 android:background="@color/gray"
                 app:attribute="image"
+                app:imageFrom="url"
+                app:imageInto="file"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
