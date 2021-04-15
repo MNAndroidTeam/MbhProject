@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="length_exception">Veuillez vérifier le longueur de ce champ</string>
+    <string name="min_length_exception">Veuillez vérifier le longueur de ce champ</string>
+    <string name="max_length_exception">Veuillez vérifier le longueur de ce champ</string>
+    <string name="email_exception">Veuillez vérifier l\'email</string>
+    <string name="empty_exception">Veuillez remplir ce champ</string>
+    <string name="accept_terms_exception">Veuillez accepter les termes svp</string>
+    <string name="verif_date">Veuillez vérifier la date</string>
+
+</resources>

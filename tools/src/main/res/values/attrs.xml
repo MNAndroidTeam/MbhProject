@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FormContainerLayout">
+        <attr name="supportError" format="boolean"  />
+        <attr name="startDate" format="reference"  />
+        <attr name="endDate" format="reference"  />
+        <attr name="differenceBetweenDates" format="integer"  />
+        <attr name="dateTimePicker" format="enum" >
+            <enum name="none" value="0"/>
+            <enum name="date" value="1"/>
+            <enum name="time" value="2"/>
+            <enum name="both" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FormTextInputLayout">
+        <attr name="attribute" format="string"  />
+        <attr name="minDateByDay" format="integer"  />
+        <attr name="maxDateByDay" format="integer"  />
+
+    </declare-styleable>
+
+    <declare-styleable name="FormSpinner">
+        <attr name="attribute"  />
+        <attr name="spinnerAttribute" format="string"  />
+    </declare-styleable>
+
+    <declare-styleable  name="FormImageView" >
+        <attr name="attribute"  />
+        <attr name="defaultPopup"  format="boolean"/>
+
+        <attr name="image_picker"  format="enum" >
+            <enum name="none" value="0"/>
+            <enum name="camera" value="1"/>
+            <enum name="gallerie" value="2"/>
+            <enum name="both" value="3"/>
+        </attr>
+
+        <attr name="imageFrom"  format="enum" >
+            <enum name="url" value="0"/>
+            <enum name="file" value="1"/>
+            <enum name="drawable" value="2"/>
+        </attr>
+    </declare-styleable>
+
+
+
+
+
+
+</resources>

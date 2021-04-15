@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <com.medianet.tools.form.FormContainerLayout
+        android:id="@+id/formulaire"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.medianet.tools.form.FormTextInputLayout
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            app:attribute="email"
+            app:boxStrokeColor="@color/purple_500"
+            app:boxStrokeWidth="2dp"
+            android:layout_margin="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/input_pwd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="email" />
+        </com.medianet.tools.form.FormTextInputLayout>
+
+        <com.medianet.tools.form.FormTextInputLayout
+            android:id="@+id/input_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            app:attribute="password"
+            app:boxStrokeColor="@color/purple_500"
+            app:boxStrokeWidth="2dp"
+            android:layout_margin="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pwd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="password" />
+        </com.medianet.tools.form.FormTextInputLayout>
+
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:tag="submit"
+            android:text="Login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </com.medianet.tools.form.FormContainerLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

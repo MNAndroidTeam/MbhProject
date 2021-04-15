@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Inscription2Activity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.medianet.tools.form.FormContainerLayout
+            android:id="@+id/formulaire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:dateTimePicker="both"
+            app:differenceBetweenDates="2"
+            app:endDate="@id/input_date_end"
+            app:startDate="@id/input_date"
+            app:supportError="false">
+
+            <com.medianet.tools.form.FormSpinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="30dp"
+                app:attribute="age"
+                app:layout_constraintEnd_toEndOf="@+id/input_address"
+                app:layout_constraintStart_toStartOf="@+id/input_address"
+                app:layout_constraintTop_toBottomOf="@+id/btnCamera"
+                app:spinnerAttribute="value" />
+
+
+            <com.medianet.tools.form.FormTextInputLayout
+                android:id="@+id/input_date"
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                android:layout_margin="30dp"
+                app:attribute="date/startDate"
+                app:boxStrokeColor="@color/purple_500"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner"
+                app:maxDateByDay="2"
+                app:minDateByDay="5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="start date"
+                    android:inputType="none"
+                    android:maxLines="1" />
+            </com.medianet.tools.form.FormTextInputLayout>
+
+            <com.medianet.tools.form.FormTextInputLayout
+                android:id="@+id/input_date_end"
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                android:layout_margin="30dp"
+                app:attribute="date/endDate"
+                app:boxStrokeColor="@color/purple_500"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_date"
+                app:maxDateByDay="2"
+                app:minDateByDay="5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dateEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="end date"
+                    android:inputType="none"
+                    android:maxLines="1" />
+            </com.medianet.tools.form.FormTextInputLayout>
+
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:tag="condition"
+                android:text="Accepte les termes  ...."
+                app:layout_constraintEnd_toEndOf="@+id/input_date_end"
+                app:layout_constraintStart_toStartOf="@+id/input_date_end"
+                app:layout_constraintTop_toBottomOf="@+id/input_date_end" />
+
+            <com.medianet.tools.form.FormImageView
+                android:id="@+id/image"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:background="@color/gray"
+                app:attribute="image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_mutate_background="true"
+                app:riv_oval="true" />
+
+
+            <Button
+                android:id="@+id/btnCamera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Camera"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnGallerie"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/image" />
+
+            <Button
+                android:id="@+id/btnGallerie"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Gallerie"
+                app:layout_constraintEnd_toEndOf="@+id/image"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnCamera"
+                app:layout_constraintTop_toBottomOf="@+id/image" />
+
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:layout_marginBottom="30dp"
+                android:tag="submit"
+                android:text="save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+
+        </com.medianet.tools.form.FormContainerLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
