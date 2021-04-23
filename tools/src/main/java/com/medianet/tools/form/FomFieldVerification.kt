@@ -90,7 +90,7 @@ interface FomFieldVerification {
 
                 propriety.declaredAnnotations.forEach { annotation ->
                     when (annotation) {
-                        is NotEmpty -> {
+                        is NotEmpty ,is Password-> {
                             val data = checkIsFieldNotEmpty(tag)
                             if (data != null) {
                                 throw FieldErrorAnnotationException(
