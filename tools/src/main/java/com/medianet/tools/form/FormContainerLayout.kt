@@ -214,9 +214,6 @@ class FormContainerLayout  (
                             val editText = findFormEditTextByAttribute(resultStatus.field)
                             if (editText != null){
                                 findFormEditTextByAttribute(resultStatus.field)?.setError(resultStatus.msg)
-                            }else{
-                                Toast.makeText(context , "submit Failed ${resultStatus.field}",Toast.LENGTH_LONG).show()
-
                             }
                         }
 
@@ -243,7 +240,6 @@ class FormContainerLayout  (
                             createModelInstance(result)
 
                             formResultListener.formResultSuccessListener(result)
-                            Toast.makeText(context , "submit success",Toast.LENGTH_LONG).show()
                         }else{
                             formResultListener.formResultErrorListener(context.getString(R.string.accept_terms_exception),condition.id)
                         }
