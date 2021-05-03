@@ -28,6 +28,10 @@ annotation class Phone(val value : Int= 8)
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)
+annotation class IP_V4_ADDRESS()
+
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.FIELD)
 annotation class Length(val value : Int= UNDEFINED_LENGTH, val min : Int = UNDEFINED_LENGTH, val max : Int= UNDEFINED_LENGTH)
 
 

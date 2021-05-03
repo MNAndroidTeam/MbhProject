@@ -8,5 +8,6 @@
     <string name="empty_exception">Veuillez remplir ce champ</string>
     <string name="accept_terms_exception">Veuillez accepter les termes svp</string>
     <string name="verif_date">Veuillez vérifier la date</string>
+    <string name="addressIp">Veuillez vérifier le format de votre adresse ip</string>
 
 </resources>

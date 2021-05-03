@@ -76,6 +76,11 @@ class FormTextInputLayout(
                     editText?.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                     endIconMode = END_ICON_PASSWORD_TOGGLE
                 }
+
+                is IP_V4_ADDRESS -> {
+                    editText?.inputType = InputType.TYPE_NUMBER_FLAG_SIGNED + InputType.TYPE_CLASS_NUMBER
+                    editText?.filters = arrayOf(InputFilter.LengthFilter(15))
+                }
                 is Phone -> {
                     editText?.inputType =  InputType.TYPE_NUMBER_FLAG_SIGNED + InputType.TYPE_CLASS_NUMBER
                     editText?.filters = arrayOf(InputFilter.LengthFilter(it.value))

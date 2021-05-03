@@ -4,6 +4,7 @@ import android.util.Patterns
 import android.widget.RadioGroup
 import androidx.core.view.children
 import com.medianet.tools.R
+import java.lang.NumberFormatException
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
 import kotlin.reflect.full.declaredMemberProperties
@@ -88,6 +89,13 @@ interface FomFieldVerification {
                     )
                 }
 
+                if (propriety.isAnnotationPresent(IP_V4_ADDRESS::class.java)){
+                    if (propriety.type != String::class.java){
+                        throw FieldDevelopperErrorAnnotationException(
+                            "propriety name : ${propriety.name} must be String"
+                        )
+                    }
+                }
                 propriety.declaredAnnotations.forEach { annotation ->
                     when (annotation) {
                         is NotEmpty ,is Password-> {
@@ -101,6 +109,15 @@ interface FomFieldVerification {
 
                         is Email -> {
                             val data = checkIsFieldEmail(propriety, tag)
+                            if (data != null) {
+                                throw FieldErrorAnnotationException(
+                                    data
+                                )
+                            }
+                        }
+
+                        is IP_V4_ADDRESS -> {
+                            val data = checkIfFieldIsIpV4( tag)
                             if (data != null) {
                                 throw FieldErrorAnnotationException(
                                     data
@@ -169,8 +186,39 @@ interface FomFieldVerification {
             }
         }
 
+        return null
+    }
 
 
+    private fun checkIfFieldIsIpV4( tag: String) :  ResultError?{
+        when(val fieldView = formContainerLayout.getFieldViewType(tag)){
+            is FormTextInputLayout -> {
+                if (formContainerLayout.editTextNotEmpty(tag)) {
+                    return ResultError(
+                        tag,
+                        formContainerLayout.context.getString(R.string.empty_exception)
+                    )
+                }
+                val value = formContainerLayout.editTextValue(tag)
+
+                try {
+
+                     value.replace(".","").toLong()
+                    if (value.count { it == '.' } != 3 ){
+                        return ResultError(
+                            tag,
+                            formContainerLayout.context.getString(R.string.addressIp)
+                        )
+                    }
+                }catch (e : NumberFormatException){
+                    return ResultError(
+                        tag,
+                        formContainerLayout.context.getString(R.string.addressIp)
+                    )
+                }
+
+            }
+        }
         return null
     }
 
