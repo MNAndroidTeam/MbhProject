@@ -78,7 +78,6 @@ class FormTextInputLayout(
                 }
 
                 is IP_V4_ADDRESS -> {
-                    editText?.inputType = InputType.TYPE_NUMBER_FLAG_SIGNED + InputType.TYPE_CLASS_NUMBER
                     editText?.filters = arrayOf(InputFilter.LengthFilter(15))
                 }
                 is Phone -> {
