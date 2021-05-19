@@ -203,7 +203,9 @@ class FormTextInputLayout(
     }
 
     fun getDateValue() : Date? {
-        return if (dateTime != 0) choosenFormatter.parse(editText?.text.toString()) else null
+        var date = editText?.text.toString()
+        if (date.isEmpty()) date = choosenFormatter.format(Calendar.getInstance().time)
+        return if (dateTime != 0) choosenFormatter.parse(date) else null
     }
 
     fun setError(msg : String){
