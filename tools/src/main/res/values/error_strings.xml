@@ -6,6 +6,7 @@
     <string name="max_length_exception">Veuillez vérifier le longueur de ce champ</string>
     <string name="email_exception">Veuillez vérifier l\'email</string>
     <string name="empty_exception">Veuillez remplir ce champ</string>
+    <string name="pwd_exception">Les deux mots de passe saisis ne correspondent pas. Veuillez réessayer.</string>
     <string name="accept_terms_exception">Veuillez accepter les termes svp</string>
     <string name="verif_date">Veuillez vérifier la date</string>
     <string name="addressIp">Veuillez vérifier le format de votre adresse ip</string>

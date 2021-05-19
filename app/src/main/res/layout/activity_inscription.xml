@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_margin="30dp"
-                app:attribute="name"
+                app:attribute="password_conf"
                 app:boxStrokeColor="@color/purple_500"
                 app:boxStrokeWidth="2dp"
                 app:layout_constraintEnd_toEndOf="parent"

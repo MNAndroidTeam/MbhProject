@@ -1,5 +1,6 @@
 package com.medianet.tools.form
 
+import android.util.Log
 import android.util.Patterns
 import android.widget.RadioGroup
 import androidx.core.view.children
@@ -17,9 +18,11 @@ interface FomFieldVerification {
 
     fun checkErrors(kClass: KClass<*> ) {
 
-        try {
+
             Thread {
-                formContainerLayout.children.filter { it.tag is String }.map { it.tag as String }.toList().forEach {tag ->
+                try {
+
+                    formContainerLayout.children.filter { it.tag is String }.map { it.tag as String }.toList().forEach {tag ->
 
                     val propriety = kClass.declaredMemberProperties
                         .find { it.name == tag.split('/')[0] }
@@ -33,12 +36,12 @@ interface FomFieldVerification {
 
                 }
                 resultStatusListener(ResultSuccess())
-            }.run()
-        }
-        catch (e:  FieldErrorAnnotationException) {
-            resultStatusListener(e.data)
-        }
 
+                } catch (e:  FieldErrorAnnotationException) {
+                        resultStatusListener(e.data)
+                    }
+
+            }.run()
 
     }
 
@@ -98,7 +101,7 @@ interface FomFieldVerification {
                 }
                 propriety.declaredAnnotations.forEach { annotation ->
                     when (annotation) {
-                        is NotEmpty ,is Password-> {
+                        is NotEmpty -> {
                             val data = checkIsFieldNotEmpty(tag)
                             if (data != null) {
                                 throw FieldErrorAnnotationException(
@@ -107,6 +110,14 @@ interface FomFieldVerification {
                             }
                         }
 
+                        is Password ->  {
+                            val data = checkIsFielPasswordCorrect(tag)
+                            if (data != null) {
+                                throw FieldErrorAnnotationException(
+                                    data
+                                )
+                            }
+                        }
                         is Email -> {
                             val data = checkIsFieldEmail(propriety, tag)
                             if (data != null) {
@@ -189,6 +200,38 @@ interface FomFieldVerification {
         return null
     }
 
+
+    private fun checkIsFielPasswordCorrect(
+        tag: String
+    ):  ResultError? {
+
+        if (formContainerLayout.editTextNotEmpty(tag)) {
+            return ResultError(
+                tag,
+                formContainerLayout.context.getString(R.string.empty_exception)
+            )
+        }
+
+        Log.e("aaaaaaaaaa","aaaaaaaaaa")
+        val tagConfPwd = "$tag${FormTextInputLayout.suffixPassword}"
+        if (formContainerLayout.findIdByTag(tagConfPwd) != -1){
+            if (formContainerLayout.editTextNotEmpty(tagConfPwd)) {
+                return ResultError(
+                    tagConfPwd,
+                    formContainerLayout.context.getString(R.string.empty_exception)
+                )
+            }
+
+
+            if (formContainerLayout.editTextValue(tagConfPwd) != formContainerLayout.editTextValue(tag)) {
+                return ResultError(
+                    tagConfPwd,
+                    formContainerLayout.context.getString(R.string.pwd_exception)
+                )
+            }
+        }
+        return null
+    }
 
     private fun checkIfFieldIsIpV4( tag: String) :  ResultError?{
         when(val fieldView = formContainerLayout.getFieldViewType(tag)){

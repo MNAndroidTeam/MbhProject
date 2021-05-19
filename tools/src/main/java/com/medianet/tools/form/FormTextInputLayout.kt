@@ -20,6 +20,10 @@ class FormTextInputLayout(
 ) : TextInputLayout(context, attrs) {
 
 
+    companion object{
+        val suffixPassword = "_conf"
+    }
+
     var choosenFormatter = dateTimeFormatter
 
 
@@ -28,6 +32,7 @@ class FormTextInputLayout(
     var minDateByDay : Int = -1
     var dateTime : Int = 0
     var formTextInputLayoutListener: FormTextInputLayoutListener?= null
+
 
     interface FormTextInputLayoutListener {
         fun onDatePickedListener(date : String)
@@ -53,7 +58,7 @@ class FormTextInputLayout(
     fun initData(clazz: Class<*> ){
         removeErrorBoxListener()
         if (!attribute.isNullOrEmpty()){
-            val field = clazz.declaredFields.find { it.name == attribute?.split('/')?.get(0)?:"" }
+            val field = clazz.declaredFields.find { it.name == attribute?.split('/')?.get(0)?.replace(suffixPassword,"")?:"" }
 
             if (field != null){
                 if (Number::class.java.isAssignableFrom(field.type)){
@@ -94,7 +99,7 @@ class FormTextInputLayout(
                 }
                 is EmbendedError -> {
 
-                    val embendedErrorField = Class.forName(field.type.name?:"").declaredFields.find { it.name == attribute?.split('/')?.get(level+1)?:""  }
+                    val embendedErrorField = Class.forName(field.type.name?:"").declaredFields.find { it.name == attribute?.split('/')?.get(level+1)?.replace(suffixPassword,"")?:""  }
                     embendedErrorField?.isAccessible = true
                     if (embendedErrorField != null){
                         initField(embendedErrorField,1)
