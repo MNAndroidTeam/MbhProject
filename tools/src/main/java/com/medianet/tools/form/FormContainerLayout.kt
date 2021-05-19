@@ -40,6 +40,7 @@ class FormContainerLayout  (
     var supportError : Boolean? = false
     var startDate : Int = 0
     var endDate : Int = 0
+    var date : Int = 0
     var dateTime : Int = 0
     var defaultPopup : Boolean
     var differenceBetweenDates : Int = 0
@@ -70,6 +71,7 @@ class FormContainerLayout  (
         )
         supportError = a.getBoolean(R.styleable.FormContainerLayout_supportError,false)
         endDate = a.getResourceId(R.styleable.FormContainerLayout_endDate,0)
+        date = a.getResourceId(R.styleable.FormContainerLayout_date,0)
         startDate = a.getResourceId(R.styleable.FormContainerLayout_startDate,0)
         dateTime = a.getInt(R.styleable.FormContainerLayout_dateTimePicker,0)
         defaultPopup = a.getBoolean(R.styleable.FormImageView_defaultPopup,true)
@@ -99,6 +101,44 @@ class FormContainerLayout  (
             if (formResultListener != null) checkForm(model,formResultListener)
         }
         setOnClickListener(this)
+
+        if (date != 0){
+            findViewById<FormTextInputLayout>(date).also {
+                it.dateTime = dateTime
+                it.enableDateTimeMode(formatter,  object :
+                    FormTextInputLayout.FormTextInputLayoutListener{
+                    override fun onDatePickedListener(date: String) {
+                        val calendar1 = Calendar.getInstance()
+                        calendar1.add(Calendar.HOUR,differenceBetweenDates )
+
+                        val calendar2 = Calendar.getInstance()
+                        calendar2.time = formatter?.parse(date)
+
+                        if (differenceBetweenDates > 0){
+
+                            if (calendar1.before(calendar2)) {
+                                findViewById<FormTextInputLayout>(endDate).error = context.getString(R.string.verif_date)
+                            } else {
+                                findViewById<FormTextInputLayout>(endDate).error = null
+                            }
+                        }else{
+
+                            if (calendar1.after(calendar2)) {
+                                findViewById<FormTextInputLayout>(endDate).error = context.getString(R.string.verif_date)
+                            } else {
+                                findViewById<FormTextInputLayout>(endDate).error = null
+                            }
+                        }
+
+
+
+
+
+                    }
+                })
+
+            }
+        }
 
         if (startDate != 0){
             findViewById<FormTextInputLayout>(startDate).also {
@@ -171,6 +211,7 @@ class FormContainerLayout  (
 
     fun verifDate() {
         try {
+
         val dateEntree = findViewById<FormTextInputLayout>(startDate).getDateValue()
         val dateSortie = findViewById<FormTextInputLayout>(endDate).getDateValue()
 

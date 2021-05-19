@@ -4,6 +4,7 @@
         <attr name="supportError" format="boolean"  />
         <attr name="startDate" format="reference"  />
         <attr name="endDate" format="reference"  />
+        <attr name="date" format="reference"  />
         <attr name="differenceBetweenDates" format="integer"  />
         <attr name="dateTimePicker" format="enum" >
             <enum name="none" value="0"/>
