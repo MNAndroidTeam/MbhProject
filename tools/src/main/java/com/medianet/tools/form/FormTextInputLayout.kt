@@ -119,7 +119,7 @@ class FormTextInputLayout(
                 }
             }
 
-            editText?.setText(choosenFormatter.format(Calendar.getInstance().time))
+           // editText?.setText(choosenFormatter.format(Calendar.getInstance().time))
         }
     }
 

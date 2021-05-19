@@ -217,7 +217,9 @@ class FormContainerLayout  (
                             }
                         }
 
-                        formResultListener.formResultErrorListener(resultStatus.msg,findIdByTag(resultStatus.field))
+                        val id = (children.find { it.tag == resultStatus.field }?.id )?:-1
+
+                        formResultListener.formResultErrorListener(resultStatus.msg,id)
 
                     }
                     is ResultSuccess -> {
