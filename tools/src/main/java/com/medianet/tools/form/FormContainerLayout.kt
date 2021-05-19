@@ -113,7 +113,7 @@ class FormContainerLayout  (
 
                         val calendar2 = Calendar.getInstance()
                         val datee = findViewById<FormTextInputLayout>(date).getDateValue()
-                        if (datee != null){
+                        if (datee != null && differenceBetweenDates !=0){
                             calendar2.time = datee
 
                             if (differenceBetweenDates > 0){
