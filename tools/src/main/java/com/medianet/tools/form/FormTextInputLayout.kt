@@ -85,9 +85,12 @@ class FormTextInputLayout(
                     editText?.filters = arrayOf(InputFilter.LengthFilter(it.value))
                 }
                 is Length -> {
-                    if (it.max > 0){
+                    if (it.value > 0){
+                        editText?.filters = arrayOf(InputFilter.LengthFilter(it.max))
+                    }else if (it.max > 0){
                         editText?.filters = arrayOf(InputFilter.LengthFilter(it.max))
                     }
+
                 }
                 is EmbendedError -> {
 
