@@ -9,6 +9,7 @@ import java.lang.NumberFormatException
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
 import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.memberExtensionProperties
 import kotlin.reflect.jvm.javaField
 
 interface FomFieldVerification {
@@ -24,7 +25,7 @@ interface FomFieldVerification {
 
                     formContainerLayout.children.filter { it.tag is String }.map { it.tag as String }.toList().forEach {tag ->
 
-                    val propriety = kClass.declaredMemberProperties
+                    val propriety = kClass.memberExtensionProperties
                         .find { it.name == tag.split('/')[0] }
 
                     if(propriety != null){
