@@ -75,12 +75,11 @@ class FormImageView(
 
     fun getImageValue(): String {
 
-        val btm = hasImage(this)
-        if ( btm != null){
+        if (hasImage(this)){
             when(imageAs){
                 0 -> {
-
-                    return bitmapToString(btm)
+                    val bitmap = viewToImage(this)
+                    return if (bitmap != null) bitmapToString(bitmap)?:"" else ""
                 }
                 1-> {
                     return path
@@ -92,13 +91,13 @@ class FormImageView(
     }
 
 
-    private fun hasImage(view: ImageView): Bitmap? {
+    private fun hasImage(view: ImageView): Boolean {
         val drawable = view.getDrawable()
-        if (drawable != null && drawable is BitmapDrawable &&  drawable.bitmap != null) {
-            return drawable.bitmap
-
+        var hasImage = drawable != null
+        if (hasImage && drawable is BitmapDrawable) {
+            hasImage = drawable.bitmap != null
         }
-        return null
+        return hasImage
     }
 
 }
