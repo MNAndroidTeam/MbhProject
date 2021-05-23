@@ -311,7 +311,7 @@ class FormContainerLayout  (
                        if (getFieldViewType(tag) != null)  it.set(clazz,getFieldViewValue(tag))
                     }
                     Int::class.java ->{
-                        if (getFieldViewType(tag) != null)  it.setInt(clazz,getFieldViewValue(tag)?.toString()?.toInt()?:0)
+                        if (getFieldViewType(tag) != null)  it.setInt(clazz,getFieldViewValue(tag)?.toString()?.toInt()?:-1)
                     }
                     Float::class.java ->{
                         if (getFieldViewType(tag) != null)   it.setFloat(clazz,getFieldViewValue(tag)?.toString()?.toFloat()?:0f)
@@ -364,7 +364,7 @@ class FormContainerLayout  (
             }
 
             is RadioGroup-> {
-                return findViewById<RadioButton>(fieldView.checkedRadioButtonId).tag.toString()
+                return if (fieldView.checkedRadioButtonId == -1) "" else findViewById<RadioButton>(fieldView.checkedRadioButtonId).tag.toString()
             }
 
             is FormSpinner -> {
