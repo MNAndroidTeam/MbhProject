@@ -103,9 +103,13 @@ class FormContainerLayout  (
             .filter { it is FormTextInputLayout }
             .map { it as FormTextInputLayout }
             .find { it.editText?.imeOptions == EditorInfo.IME_ACTION_DONE }
-            ?.setOnClickListener {
+            ?.editText?.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (formResultListener != null) checkForm(model,formResultListener)
-            }
+                true
+            } else false
+        }
+
 
         findViewWithTag<View>("submit")?.setOnClickListener {
             if (formResultListener != null) checkForm(model,formResultListener)
