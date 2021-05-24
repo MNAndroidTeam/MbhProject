@@ -23,11 +23,13 @@ import android.view.View
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.annotation.NonNull
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import androidx.core.view.forEach
 import com.medianet.tools.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -97,9 +99,18 @@ class FormContainerLayout  (
             if (model != null )initFields(it, model)
         }
 
+        children
+            .filter { it is FormTextInputLayout }
+            .map { it as FormTextInputLayout }
+            .find { it.editText?.imeOptions == EditorInfo.IME_ACTION_DONE }
+            ?.setOnClickListener {
+                if (formResultListener != null) checkForm(model,formResultListener)
+            }
+
         findViewWithTag<View>("submit")?.setOnClickListener {
             if (formResultListener != null) checkForm(model,formResultListener)
         }
+
         setOnClickListener(this)
 
         if (date != 0){
