@@ -118,7 +118,7 @@ fun stringToBitMap(image: String?): Bitmap? {
     }
 }
 
-fun bitmapToString(bitmap: Bitmap): String {
+fun bitmapToString(bitmap: Bitmap): String? {
     val byteArrayOutputStream = ByteArrayOutputStream()
     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
     val byteArray = byteArrayOutputStream.toByteArray()

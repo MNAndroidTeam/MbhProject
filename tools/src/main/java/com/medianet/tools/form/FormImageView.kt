@@ -2,11 +2,8 @@ package com.medianet.tools.form
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.util.AttributeSet
-import android.widget.ImageView
-import androidx.core.view.drawToBitmap
 import androidx.exifinterface.media.ExifInterface
 import com.makeramen.roundedimageview.RoundedImageView
 import com.medianet.tools.R
@@ -75,29 +72,16 @@ class FormImageView(
 
     fun getImageValue(): String {
 
-        if (hasImage(this)){
-            when(imageAs){
-                0 -> {
-                    val bitmap = viewToImage(this)
-                    return if (bitmap != null) bitmapToString(bitmap)?:"" else ""
-                }
-                1-> {
-                    return path
-                }
+        when(imageAs){
+            0 -> {
+                val bitmap = viewToImage(this)
+                return if (bitmap != null) bitmapToString(bitmap)?:"" else ""
+            }
+            1-> {
+                return path
             }
         }
-
         return ""
-    }
-
-
-    private fun hasImage(view: ImageView): Boolean {
-        val drawable = view.getDrawable()
-        var hasImage = drawable != null
-        if (hasImage && drawable is BitmapDrawable) {
-            hasImage = drawable.bitmap != null
-        }
-        return hasImage
     }
 
 }
