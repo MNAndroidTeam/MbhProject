@@ -105,9 +105,11 @@ class FormContainerLayout  (
             .find { it.editText?.imeOptions == EditorInfo.IME_ACTION_DONE }
             ?.editText?.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
+
                 if (formResultListener != null) checkForm(model,formResultListener)
-                true
-            } else false
+
+            }
+                false
         }
 
 
