@@ -1,11 +1,11 @@
 package com.medianet.tools.form
 
+import android.app.Activity
 import android.content.Context
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.MediaStore
@@ -63,8 +63,8 @@ fun TextInputLayout.retriveText() : String{
 }
 
 data class Login(
-    @Email var email: String ="",
-    @Password var password : String=""
+    @Email var email: String = "",
+    @Password var password: String = ""
 )
 
 

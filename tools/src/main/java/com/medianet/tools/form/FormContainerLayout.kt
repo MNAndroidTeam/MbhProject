@@ -6,10 +6,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
 import android.os.StrictMode
@@ -25,11 +21,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-import androidx.annotation.NonNull
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
-import androidx.core.view.forEach
 import com.medianet.tools.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -513,7 +507,10 @@ class FormContainerLayout  (
                     pathFromGallerie = FileChooser.getPath(context, contentURI)
                     selectedImageView?.path = pathFromGallerie
 
-                    if (contentURI != null) selectedImageView?.setImage(contentURI, getCameraPhotoOrientation(pathFromGallerie))
+                    if (contentURI != null) {
+                        selectedImageView?.getString64FromURI(contentURI, activity!!.contentResolver)
+                        selectedImageView?.setImage(contentURI, getCameraPhotoOrientation(pathFromGallerie))
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -523,6 +520,7 @@ class FormContainerLayout  (
             try {
               if (imageUri != null){
                   selectedImageView?.path = pathFromCamera
+                  if (data != null && data.data != null )selectedImageView?.getString64FromURI(data.data!!, activity!!.contentResolver)
                   selectedImageView?.setImage(imageUri!! , getCameraPhotoOrientation(pathFromCamera))
               }
             } catch (e: Exception) {

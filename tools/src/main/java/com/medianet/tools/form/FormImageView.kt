@@ -1,15 +1,16 @@
 package com.medianet.tools.form
 
+import android.content.ContentResolver
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import android.util.AttributeSet
-import androidx.exifinterface.media.ExifInterface
 import com.makeramen.roundedimageview.RoundedImageView
 import com.medianet.tools.R
 import com.squareup.picasso.Picasso
 import java.io.File
-import java.io.IOException
 
 
 class FormImageView(
@@ -22,6 +23,8 @@ class FormImageView(
     var imageAs : Int
     var imagePicker : Int
     var path : String = ""
+    var base64 : String = ""
+
     init {
 
         val a = context.obtainStyledAttributes(
@@ -36,7 +39,6 @@ class FormImageView(
          if (attribute != null) tag = attribute
         a.recycle()
     }
-
 
     fun setImageFromAttribute( data : Any? ){
         if (data != null)
@@ -74,14 +76,37 @@ class FormImageView(
 
         when(imageAs){
             0 -> {
-                val bitmap = viewToImage(this)
-                return if (bitmap != null) bitmapToString(bitmap)?:"" else ""
+               return base64
             }
             1-> {
                 return path
             }
         }
         return ""
+    }
+
+    fun getString64FromURI(contentURI: Uri, contentResolver: ContentResolver) {
+        try {
+            contentURI.let {
+                if(Build.VERSION.SDK_INT < 28) {
+                    val bitmap = MediaStore.Images.Media.getBitmap(
+                        contentResolver,
+                        contentURI
+                    )
+                    base64 = bitmapToString(bitmap)?:""
+
+                } else {
+                    val source = ImageDecoder.createSource(contentResolver, contentURI)
+                    val bitmap = ImageDecoder.decodeBitmap(source)
+
+                    base64 = bitmapToString(bitmap)?:""
+
+
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }

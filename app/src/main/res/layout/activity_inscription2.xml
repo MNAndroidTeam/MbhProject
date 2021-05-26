@@ -107,6 +107,7 @@
                 android:background="@color/gray"
                 app:attribute="image"
                 app:imageFrom="url"
+                app:imageAs="base64"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

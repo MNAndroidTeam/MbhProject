@@ -12,6 +12,7 @@ import com.medianet.tools.form.FormContainerLayout
 import com.medianet.tools.form.FormContainerLayout.Companion.PERMISSIONS_REQUEST_CODE
 import com.medianet.tools.form.FormResultListener
 import com.medianet.tools.form.stringToBitMap
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_inscription2.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,9 +42,7 @@ class Inscription2Activity : AppCompatActivity() {
 
                 override fun formResultSuccessListener(result: User) {
 
-                    Log.e("uuuuuu","$result")
-                    val bitm = stringToBitMap(result.image)
-                    if (bitm != null) image.setImageBitmap(bitm)
+                    Log.e("uuuuuu","${result.image.length}")
                 }
 
                 override fun formResultErrorListener(msg: String, id: Int) {
