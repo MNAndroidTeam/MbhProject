@@ -12,6 +12,7 @@ import com.medianet.tools.R
 import java.lang.reflect.Field
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class FormTextInputLayout(
@@ -58,7 +59,10 @@ class FormTextInputLayout(
     fun initData(clazz: Class<*> ){
         removeErrorBoxListener()
         if (!attribute.isNullOrEmpty()){
-            val field = clazz.declaredFields.find { it.name == attribute?.split('/')?.get(0)?.replace(suffixPassword,"")?:"" }
+
+            val fields = ArrayList(clazz.declaredFields.toList())
+            fields.addAll(clazz.superclass?.declaredFields?.toList()?:ArrayList())
+            val field = fields.find { it.name == attribute?.split('/')?.get(0)?.replace(suffixPassword,"")?:"" }
 
             if (field != null){
                 if (Number::class.java.isAssignableFrom(field.type)){

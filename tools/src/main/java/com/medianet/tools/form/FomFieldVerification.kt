@@ -8,7 +8,9 @@ import com.medianet.tools.R
 import java.lang.NumberFormatException
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
+import kotlin.reflect.full.allSuperclasses
 import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.superclasses
 import kotlin.reflect.jvm.javaField
 
 interface FomFieldVerification {
@@ -22,10 +24,14 @@ interface FomFieldVerification {
             Thread {
                 try {
 
+                    val fields = ArrayList(kClass.declaredMemberProperties.toList())
+                    fields.addAll(kClass.superclasses.flatMap { it.declaredMemberProperties }.toList())
+
                     formContainerLayout.children.filter { it.tag is String }.map { it.tag as String }.toList().forEach {tag ->
 
-                    val propriety = kClass.declaredMemberProperties
-                        .find { it.name == tag.split('/')[0] }
+
+                    val propriety =
+                        fields.find { it.name == tag.split('/')[0] }
 
                     if(propriety != null){
                         checkProprety(

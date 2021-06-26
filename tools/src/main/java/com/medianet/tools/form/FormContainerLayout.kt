@@ -27,6 +27,7 @@ import androidx.core.view.children
 import com.medianet.tools.R
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class FormContainerLayout  (
     context: Context,
@@ -183,7 +184,10 @@ class FormContainerLayout  (
      fun initFields(view: View, model: Any , level : Int = 0) {
         try {
 
-            val field =  model::class.java.declaredFields.find { it.name == view.tag.toString().split('/')[level] }
+
+            val fields = ArrayList(model::class.java.superclass?.declaredFields?.toList()?:ArrayList())
+            fields.addAll(model::class.java.declaredFields.toList())
+            val field =  fields.find { it.name == view.tag.toString().split('/')[level] }
 
 
             if (field != null){
@@ -265,6 +269,7 @@ class FormContainerLayout  (
                 when(resultStatus){
                     is ResultError -> {
 
+                        Log.e("ResultErro",resultStatus.msg + " "+resultStatus.field)
                         if (supportError == true){
                             val editText = findFormEditTextByAttribute(resultStatus.field)
                             if (editText != null){

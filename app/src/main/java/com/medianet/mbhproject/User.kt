@@ -14,7 +14,7 @@ data class User(
    @EmbendedError var date : BetweenDates? = null,
    @EmbendedError var address: Address? = null,
    var daysOfWeek: ArrayList<String> = ArrayList()
-) : Serializable
+) : UserAdd() , Serializable
 
 
 data class Address(
@@ -35,3 +35,8 @@ data class AgeInterval(
       return value
    }
 }
+
+open class UserAdd(
+   @Phone var numberPhone : String =""
+
+)

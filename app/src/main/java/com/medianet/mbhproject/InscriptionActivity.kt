@@ -28,9 +28,8 @@ class InscriptionActivity : AppCompatActivity() {
             email = "benhamouda@gmail.com",
             name = "mohamed",
             address = Address(name = "address"),
-            phone = "22332423",
             gender = 1
-        ))
+        ).also { it.numberPhone = "22332423" })
         btnSave.setOnClickListener {
 
             formulaire.checkForm(
