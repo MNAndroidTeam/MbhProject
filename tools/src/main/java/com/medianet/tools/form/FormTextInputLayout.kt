@@ -147,7 +147,7 @@ class FormTextInputLayout(
 
         val datePickerDialog = DatePickerDialog(
             context,
-            DatePickerDialog.OnDateSetListener { v, year, monthOfYear, dayOfMonth ->
+            { v, year, monthOfYear, dayOfMonth ->
 
                 val calendar = Calendar.getInstance().also {
                     it.set(Calendar.DAY_OF_MONTH , dayOfMonth)
@@ -191,13 +191,18 @@ class FormTextInputLayout(
         val mTimePicker: TimePickerDialog
         mTimePicker = TimePickerDialog(
             context,
-            TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+            { timePicker, selectedHour, selectedMinute ->
 
+                Log.e("xxxxxxxxxxx","${choosenFormatter.format(cal.time)}")
 
-                val calendar = cal.also {
-                    it.set(Calendar.HOUR , selectedHour)
+                val calendar = Calendar.getInstance().also {
+                    it.set(Calendar.HOUR_OF_DAY , selectedHour)
                     it.set(Calendar.MINUTE , selectedMinute)
                 }
+                calendar.set(Calendar.DATE , cal.get(Calendar.DATE))
+                calendar.set(Calendar.MONTH , cal.get(Calendar.MONTH))
+                calendar.set(Calendar.YEAR , cal.get(Calendar.YEAR))
+                Log.e("xxxxxxxxxxx","${choosenFormatter.format(calendar.time)}")
                 editText?.setText(choosenFormatter.format(calendar.time))
                 formTextInputLayoutListener?.onDatePickedListener(editText?.text.toString())
 
@@ -213,6 +218,8 @@ class FormTextInputLayout(
 
     fun getDateValue() : Date? {
         var date = editText?.text.toString()
+        Log.e("iiiiiiiiiiiii","$date")
+
         if (date.isEmpty()) date = choosenFormatter.format(Calendar.getInstance().time)
         return if (dateTime != 0) choosenFormatter.parse(date) else null
     }

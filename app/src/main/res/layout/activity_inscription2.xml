@@ -33,7 +33,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/btnGallerie"
                 app:layout_constraintStart_toStartOf="@+id/btnCamera"
                 app:layout_constraintTop_toBottomOf="@+id/btnCamera"
-                app:spinnerAttribute="value" />
+                app:spinnerAttribute="flag" />
 
 
             <com.medianet.tools.form.FormTextInputLayout
