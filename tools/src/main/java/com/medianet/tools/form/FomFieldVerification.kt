@@ -143,11 +143,10 @@ interface FomFieldVerification {
                         }
 
                         is Phone -> {
-                            val data = checkLengthField(
+                            val data = checkPhoneField(
                                 tag,
-                                if (annotation.required  )annotation.value else  0,
-                                  0,
-                                if (!annotation.required ) annotation.value else 0)
+                                annotation.value
+                            )
                             if (data != null) {
                                 throw FieldErrorAnnotationException(
                                     data
@@ -319,6 +318,23 @@ interface FomFieldVerification {
             }
         }
 
+
+        return null
+    }
+
+
+    private fun checkPhoneField(
+        tag: String,
+        length: Int
+    ): ResultError? {
+
+
+        val fieldLength= formContainerLayout.editTextValue(tag).length
+        if (fieldLength > 0 && fieldLength != length)
+            return ResultError(
+                tag,
+                formContainerLayout.context.getString(R.string.length_exception)
+            )
 
         return null
     }
