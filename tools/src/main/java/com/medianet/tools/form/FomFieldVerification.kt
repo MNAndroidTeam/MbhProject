@@ -145,9 +145,9 @@ interface FomFieldVerification {
                         is Phone -> {
                             val data = checkLengthField(
                                 tag,
-                                annotation.value,
-                                0,
-                            0)
+                                if (annotation.required  )annotation.value else  0,
+                                  0,
+                                if (!annotation.required ) annotation.value else 0)
                             if (data != null) {
                                 throw FieldErrorAnnotationException(
                                     data

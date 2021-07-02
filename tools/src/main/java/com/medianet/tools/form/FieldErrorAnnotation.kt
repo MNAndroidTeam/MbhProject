@@ -24,7 +24,7 @@ annotation class Password
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)
-annotation class Phone(val value : Int= 8)
+annotation class Phone(val value : Int= 8 , val required : Boolean = true)
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)
